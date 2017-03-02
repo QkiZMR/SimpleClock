@@ -1,5 +1,6 @@
 package pl.qkiz.simpleclock;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
@@ -13,6 +14,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView TimeTxtView = (TextView) findViewById(R.id.textView3);
+        Typeface digitalClock=Typeface.createFromAsset(getAssets(),"fonts/alarm_clock.ttf");
+        assert TimeTxtView != null;
+        TimeTxtView.setTypeface(digitalClock);
         TimeTxtView.setText(czas());
         Thread TimeThread = new Thread() {
             public void run() {
@@ -23,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 TextView TimeTxtView = (TextView) findViewById(R.id.textView3);
+                                assert TimeTxtView != null;
                                 TimeTxtView.setText(czas());
                             }
                         });
@@ -38,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         Calendar TimeNow = Calendar.getInstance();
         String TimeFormat = "HH:mm:ss";
         CharSequence TimeSeq = DateFormat.format(TimeFormat,TimeNow);
-        String TimeResult = TimeSeq.toString();
-        return TimeResult;
+        return TimeSeq.toString();
     }
 }
