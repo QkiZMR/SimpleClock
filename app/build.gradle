@@ -1,6 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        standard {
+            storeFile file('/home/qkiz/Android/keystore4apps.jks')
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion '25.0.2'
     defaultConfig {
@@ -15,12 +20,16 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.standard
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
